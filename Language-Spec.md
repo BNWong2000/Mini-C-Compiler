@@ -36,10 +36,16 @@ Here is a rough overview of the features I intend on supporting with this langua
 - Unions
 - Functions
 - Integer and Floating Point Arithmetic
+- Logical operations
+    - Short circuiting
+- Loops and Decision Structures
+- Strong type checking
+- Single Line Comments
 
 
 
 
 
 Standard was based off a subset of the C language. 
+
 https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf
