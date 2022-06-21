@@ -108,11 +108,12 @@ Token *Scanner::lex()
         std::string stringLexeme = "\"";
         while (currChar != '\"')
         {
-            if(currChar == '\\'){
+            if (currChar == '\\')
+            {
                 stringLexeme.push_back(currChar);
                 nextChar();
             }
-            if(currChar == '\n')
+            if (currChar == '\n')
             {
                 // Error
                 std::cerr << "ERROR: Newline in String " << std::endl;
@@ -166,10 +167,29 @@ bool isAlpha(int character)
     return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || (character == '_');
 }
 
+bool isAlphaNum(int character)
+{
+    return (character >= 'a' && character <= 'z') 
+    || (character >= 'A' && character <= 'Z') 
+    || (character == '_') 
+    || (character >= '0' && character <= '9');
+}
+
 Token *Scanner::handleKeywordAndIdentifier()
 {
-
-    return nullptr;
+    std::string currString = "";
+    currString.push_back(currChar);
+    nextChar();
+    while(isAlphaNum(currChar)){
+        currString.push_back(currChar);
+        nextChar();
+    }
+    auto keyWordFind = keyWords.find(currString);
+    if(keyWordFind != keyWords.end()){
+        return makeToken(keyWordFind->second);
+    }else{
+        return makeToken(IDENTIFIER, currString);
+    }
 }
 
 Token *Scanner::handleNumbers()
