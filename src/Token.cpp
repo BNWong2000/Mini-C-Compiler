@@ -1,9 +1,10 @@
 #include "Token.hpp"
 
-Token::Token(TokenType type, std::string lexeme, int line){
+Token::Token(TokenType type, std::string lexeme, int line, int col){
     theType = type;
     theLexeme = lexeme;
     lineNumber = line;
+    colNumber = col;
 }
 
 void Token::printToken()
@@ -142,6 +143,8 @@ std::string getTokenString(TokenType token)
         return "character literal";
     case STRING_LIT:
         return "string literal";
+    case IDENTIFIER:
+        return "identifier";
     case EOF_TOKEN:
         return "EOF";
     default:

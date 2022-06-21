@@ -8,12 +8,18 @@
 class Scanner
 {
 public:
-    Scanner();
+    Scanner(std::istream *input);
     ~Scanner() = default;
 
-    int scan(std::ifstream &inputStream);
-private:
+    int scan();
+    Token *lex();
 
+private:
+    std::istream *inputStream;
+    int currLine;
+    int currCol;
+
+    char nextChar();
 };
 
 #endif
