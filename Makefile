@@ -10,11 +10,11 @@ DEPS := $(OBJS:.o=.d)
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
-CPPFLAGS ?= -Wall -O2 $(INC_FLAGS) -MMD -MP
+CPPFLAGS ?= -std=c++11 -Wall -O2 $(INC_FLAGS) -MMD -MP
 
-CC := clang++
+CC := clang++ 
 
-$(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
+$(TARGET_EXEC): $(OBJS)
 	$(CC) $(OBJS) -o $@ $(LDFLAGS)
 
 # assembly

@@ -2,9 +2,8 @@
 #define SCANNER_HPP
 
 #include <fstream>
+#include "Token.hpp"
 
-
-bool debug = true;
 
 class Scanner
 {
@@ -14,7 +13,7 @@ public:
 
     int scan(std::ifstream &inputStream);
 private:
-    
+
 };
 
 #endif

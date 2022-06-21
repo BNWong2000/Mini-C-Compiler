@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    int returnValue;
+    int returnValue = 0;
     if (argc < 2)
     {
         std::cerr << "ERROR: Missing arguments. Usage: ./main [file]" << std::endl;

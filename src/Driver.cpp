@@ -12,7 +12,6 @@ Driver::Driver()
  */
 int Driver::runFile(std::string filePath)
 {
-    bool valid;
     std::ifstream inputStream;
     inputStream.open(filePath);
 
