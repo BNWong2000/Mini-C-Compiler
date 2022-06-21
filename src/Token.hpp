@@ -7,7 +7,6 @@
 
 enum TokenType
 {
-
     // brace = {}, paren = (), bracket = []
     LEFT_BRACE,
     RIGHT_BRACE,
@@ -58,6 +57,8 @@ enum TokenType
     COLON,
     SEMICOLON,
     ARROW,
+    SINGLE_QUOTE,
+    DOUBLE_QUOTE,
 
     // Types:
     INT_TYPE,

@@ -19,7 +19,18 @@ private:
     int currLine;
     int currCol;
 
+    int currChar;
+
     int nextChar();
+
+    bool isNum(int character);
+    bool isAlpha(int character);
+
+    Token *handleKeywordAndIdentifier();
+    Token *handleNumbers();
+
+    Token *makeToken(TokenType token);
+    Token *makeToken(TokenType token, std::string lexeme);
 };
 
 #endif

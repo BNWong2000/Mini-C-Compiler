@@ -1,35 +1,138 @@
 #include "Scanner.hpp"
 
-Scanner::Scanner(std::istream *input) {
+Scanner::Scanner(std::istream *input)
+{
     currLine = 1;
-    currCol = 1;
+    currCol = 0;
     inputStream = input;
+    currChar = nextChar();
 }
 
-
-int Scanner::scan(){
-    
+int Scanner::scan()
+{
     return 0;
 }
 
-Token *Scanner::lex(){
-    int currChar = nextChar();
+Token *Scanner::lex()
+{
+    while (isspace(currChar))
+    {
+        if (currChar == '\n')
+        {
+            currLine++;
+            currCol = 0;
+        }
+        currChar = nextChar();
+    }
+
     switch (currChar)
     {
     case EOF:
-
-        break;
+        return makeToken(EOF_TOKEN);
+    case '{':
+        return makeToken(LEFT_BRACE);
+    case '}':
+        return makeToken(RIGHT_BRACE);
     case '(':
-        /* code */
-        break;
-    
+        return makeToken(LEFT_PAREN);
+    case ')':
+        return makeToken(RIGHT_PAREN);
+    case '[':
+        return makeToken(LEFT_BRACKET);
+    case ']':
+        return makeToken(RIGHT_BRACKET);
+    case '+':
+        //
+    case '-':
+        //
+    case '*':
+        //
+    case '/':
+        //
+    case '%':
+        //
+    case '|':
+        //
+    case '&':
+        //
+    case '^':
+        //
+    case '~':
+        return makeToken(BIT_NOT);
+    case '<':
+        //
+    case '>':
+        //
+    case '!':
+        //
+    case '=':
+        //
+    case ',':
+        return makeToken(COMMA);
+    case '.':
+        return makeToken(DOT);
+    case ':':
+        return makeToken(COLON);
+    case ';':
+        return makeToken(SEMICOLON);
+    case '\'':
+        return makeToken(SINGLE_QUOTE);
+    case '\"':
+        return makeToken(DOUBLE_QUOTE);
     default:
-        break;
+        if (isNum(currChar))
+        {
+            return handleNumbers();
+        }
+        else if (isAlpha(currChar))
+        {
+            return handleKeywordAndIdentifier();
+        }
+        else
+        {
+            std::cerr << "ERROR: unknown character found on line " << currLine << std::endl;
+            return nullptr;
+        }
     }
+    return nullptr;
 }
 
 // Currently returns an int, rather than a char, so that I can deal with eof
-int Scanner::nextChar(){
+int Scanner::nextChar()
+{
     currCol++;
     return inputStream->get();
+}
+
+bool isNum(int character)
+{
+    return character >= '0' && character <= '9';
+}
+
+bool isAlpha(int character)
+{
+    return (character >= 'a' && character <= 'z')
+        || (character >= 'A' && character <= 'Z')
+        || (character == '_');
+}
+
+Token *handleKeywordAndIdentifier()
+{
+
+}
+
+Token *handleNumbers()
+{
+
+}
+
+
+Token *Scanner::makeToken(TokenType token)
+{
+    return new Token(token, "", currLine, currCol);
+}
+
+Token *Scanner::makeToken(TokenType token, std::string lexeme)
+{
+    return new Token(token, lexeme, currLine, currCol);
 }
