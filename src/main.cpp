@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     else if (argc == 2)
     {
         Driver *fileDriver = new Driver();
-        returnValue = fileDriver->runFile(argv[0]);
+        returnValue = fileDriver->runFile(argv[1]);
     }
     return returnValue;
 }

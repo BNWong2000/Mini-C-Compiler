@@ -10,6 +10,10 @@ Scanner::Scanner(std::istream *input)
 
 int Scanner::scan()
 {
+    Token *currentToken = lex();
+    while(currentToken->getTheType() != EOF_TOKEN){
+        currentToken->printToken();
+    }
     return 0;
 }
 
@@ -100,8 +104,13 @@ Token *Scanner::lex()
 // Currently returns an int, rather than a char, so that I can deal with eof
 int Scanner::nextChar()
 {
+    char c;
+    inputStream->get(c);
+    std::cout << "c is "<< (int)c << std::endl;
     currCol++;
-    return inputStream->get();
+    int rV = inputStream->get();
+    std::cout << "hi " << rV << "\n";
+    return rV;
 }
 
 bool isNum(int character)
@@ -116,6 +125,7 @@ bool isAlpha(int character)
 
 Token *Scanner::handleKeywordAndIdentifier()
 {
+    return nullptr;
 }
 
 Token *Scanner::handleNumbers()

@@ -1,7 +1,7 @@
 #ifndef SCANNER_HPP
 #define SCANNER_HPP
 
-#include <fstream>
+#include <istream>
 #include "Token.hpp"
 
 bool isNum(int character);

@@ -27,7 +27,9 @@ int Driver::runFile(std::string filePath)
     }
     tokenScanner = new Scanner(&inputStream);
     // start compiling
-    return run();
+    int returnCode = run();
+    inputStream.close();
+    return returnCode;
 }
 
 /**
