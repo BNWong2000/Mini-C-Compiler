@@ -54,32 +54,32 @@ Token *Scanner::lex()
         nextChar();
         return makeToken(RIGHT_BRACKET);
     case '+':
-        //
+        // +, +=
     case '-':
-        //
+        // -, -=, ->
     case '*':
-        //
+        // *, *= 
     case '/':
-        //
+        // /, /=
     case '%':
-        //
+        // %, %=
     case '|':
-        //
+        // |, ||, |=
     case '&':
-        //
+        // &, &&, &=
     case '^':
-        //
+        // ^, ^=
     case '~':
         nextChar();
         return makeToken(BIT_NOT);
     case '<':
-        //
+        // <, <<, <=, <<=
     case '>':
-        //
+        // >, >>, >=, >>=
     case '!':
-        //
+        // !, != 
     case '=':
-        //
+        // =, ==
     case ',':
         nextChar();
         return makeToken(COMMA);
@@ -93,15 +93,28 @@ Token *Scanner::lex()
         nextChar();
         return makeToken(SEMICOLON);
     case '\'':
+    {
+        std::string stringLexeme = "\'";
         nextChar();
         if (currChar == '\\')
         {
-            //
+            stringLexeme.push_back(currChar);
+            nextChar();
         }
-        else
-        {
+        if(currChar == '\n' || currChar == EOF){
+            std::cerr << "ERROR: invalid character. " << std::endl;
+            return nullptr;
         }
-        return makeToken(CHAR_LIT);
+        stringLexeme.push_back(currChar);
+        nextChar();
+        if(currChar != '\''){
+            std::cerr << "ERROR: Multiple characters in char. Did you intend to use a string instead?" << std::endl;
+            return nullptr;
+        }
+        stringLexeme += '\'';
+        nextChar();
+        return makeToken(CHAR_LIT, stringLexeme);
+    }
     case '\"':
     {
         nextChar();
@@ -169,10 +182,7 @@ bool isAlpha(int character)
 
 bool isAlphaNum(int character)
 {
-    return (character >= 'a' && character <= 'z') 
-    || (character >= 'A' && character <= 'Z') 
-    || (character == '_') 
-    || (character >= '0' && character <= '9');
+    return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || (character == '_') || (character >= '0' && character <= '9');
 }
 
 Token *Scanner::handleKeywordAndIdentifier()
@@ -180,14 +190,18 @@ Token *Scanner::handleKeywordAndIdentifier()
     std::string currString = "";
     currString.push_back(currChar);
     nextChar();
-    while(isAlphaNum(currChar)){
+    while (isAlphaNum(currChar))
+    {
         currString.push_back(currChar);
         nextChar();
     }
     auto keyWordFind = keyWords.find(currString);
-    if(keyWordFind != keyWords.end()){
+    if (keyWordFind != keyWords.end())
+    {
         return makeToken(keyWordFind->second);
-    }else{
+    }
+    else
+    {
         return makeToken(IDENTIFIER, currString);
     }
 }
