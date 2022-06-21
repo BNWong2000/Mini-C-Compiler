@@ -5,14 +5,16 @@ Scanner::Scanner(std::istream *input)
     currLine = 1;
     currCol = 0;
     inputStream = input;
-    currChar = nextChar();
+    nextChar();
 }
 
 int Scanner::scan()
 {
     Token *currentToken = lex();
-    while(currentToken->getTheType() != EOF_TOKEN){
+    while(currentToken && currentToken->getTheType() != EOF_TOKEN){
         currentToken->printToken();
+        std::cout << "hi" << std::endl;
+        currentToken = lex();
     }
     return 0;
 }
@@ -26,7 +28,7 @@ Token *Scanner::lex()
             currLine++;
             currCol = 0;
         }
-        currChar = nextChar();
+        nextChar();
     }
 
     switch (currChar)
@@ -34,16 +36,22 @@ Token *Scanner::lex()
     case EOF:
         return makeToken(EOF_TOKEN);
     case '{':
+        nextChar();
         return makeToken(LEFT_BRACE);
     case '}':
+        nextChar();
         return makeToken(RIGHT_BRACE);
     case '(':
+        nextChar();
         return makeToken(LEFT_PAREN);
     case ')':
+        nextChar();
         return makeToken(RIGHT_PAREN);
     case '[':
+        nextChar();
         return makeToken(LEFT_BRACKET);
     case ']':
+        nextChar();
         return makeToken(RIGHT_BRACKET);
     case '+':
         //
@@ -62,6 +70,7 @@ Token *Scanner::lex()
     case '^':
         //
     case '~':
+        nextChar();
         return makeToken(BIT_NOT);
     case '<':
         //
@@ -72,16 +81,22 @@ Token *Scanner::lex()
     case '=':
         //
     case ',':
+        nextChar();
         return makeToken(COMMA);
     case '.':
+        nextChar();
         return makeToken(DOT);
     case ':':
+        nextChar();
         return makeToken(COLON);
     case ';':
+        nextChar();
         return makeToken(SEMICOLON);
     case '\'':
+        nextChar();
         return makeToken(SINGLE_QUOTE);
     case '\"':
+        nextChar();
         return makeToken(DOUBLE_QUOTE);
     default:
         if (isNum(currChar))
@@ -102,15 +117,10 @@ Token *Scanner::lex()
 }
 
 // Currently returns an int, rather than a char, so that I can deal with eof
-int Scanner::nextChar()
+void Scanner::nextChar()
 {
-    char c;
-    inputStream->get(c);
-    std::cout << "c is "<< (int)c << std::endl;
     currCol++;
-    int rV = inputStream->get();
-    std::cout << "hi " << rV << "\n";
-    return rV;
+    currChar = inputStream->get();
 }
 
 bool isNum(int character)
@@ -148,7 +158,7 @@ Token *Scanner::handleNumbers()
             }
         }
         numberLexeme.push_back(currChar);
-        currChar = nextChar();
+        nextChar();
     }
     TokenType token = isFloat ? FLOAT_LIT : INTEGER_LIT;
     return makeToken(token, numberLexeme);

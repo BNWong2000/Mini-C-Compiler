@@ -23,7 +23,7 @@ private:
 
     int currChar;
 
-    int nextChar();
+    void nextChar();
 
     Token *handleKeywordAndIdentifier();
     Token *handleNumbers();
