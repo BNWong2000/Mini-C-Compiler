@@ -19,7 +19,7 @@ private:
     int currLine;
     int currCol;
 
-    char nextChar();
+    int nextChar();
 };
 
 #endif
