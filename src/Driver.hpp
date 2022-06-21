@@ -20,7 +20,7 @@ private:
     Scanner *tokenScanner;
     Parser *syntaxAnalyzer;
 
-    int run(std::ifstream &inputStream);
+    int run();
 
 };
 

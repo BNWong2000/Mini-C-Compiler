@@ -2,7 +2,6 @@
 
 Driver::Driver()
 {
-    tokenScanner = new Scanner();
     syntaxAnalyzer = new Parser();
 }
 
@@ -26,16 +25,16 @@ int Driver::runFile(std::string filePath)
         std::cerr << "ERROR: Error trying to read file" << std::endl;
         return 1;
     }
-    
+    tokenScanner = new Scanner(&inputStream);
     // start compiling
-    return run(inputStream);
+    return run();
 }
 
 /**
  * A function that takes the file input stream and compiles it.
  */ 
-int Driver::run(std::ifstream &inputStream)
+int Driver::run()
 {
-    int scanStatus = tokenScanner->scan(inputStream);
+    int scanStatus = tokenScanner->scan();
     return scanStatus;
 }

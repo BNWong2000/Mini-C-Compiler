@@ -98,6 +98,8 @@ enum TokenType
     EOF_TOKEN
 };
 
+std::string getTokenString(TokenType token);
+
 class Token
 {
 public:

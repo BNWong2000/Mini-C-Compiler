@@ -4,6 +4,8 @@
 #include <fstream>
 #include "Token.hpp"
 
+bool isNum(int character);
+bool isAlpha(int character);
 
 class Scanner
 {
@@ -22,9 +24,6 @@ private:
     int currChar;
 
     int nextChar();
-
-    bool isNum(int character);
-    bool isAlpha(int character);
 
     Token *handleKeywordAndIdentifier();
     Token *handleNumbers();

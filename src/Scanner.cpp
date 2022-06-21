@@ -116,7 +116,6 @@ bool isAlpha(int character)
 
 Token *Scanner::handleKeywordAndIdentifier()
 {
-    
 }
 
 Token *Scanner::handleNumbers()
