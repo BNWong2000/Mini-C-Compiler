@@ -111,21 +111,39 @@ bool isNum(int character)
 
 bool isAlpha(int character)
 {
-    return (character >= 'a' && character <= 'z')
-        || (character >= 'A' && character <= 'Z')
-        || (character == '_');
+    return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z') || (character == '_');
 }
 
-Token *handleKeywordAndIdentifier()
+Token *Scanner::handleKeywordAndIdentifier()
 {
-
+    
 }
 
-Token *handleNumbers()
+Token *Scanner::handleNumbers()
 {
-
+    bool isFloat = false;
+    std::string numberLexeme = "";
+    while (currChar == '.' || isNum(currChar))
+    {
+        if (currChar == '.')
+        {
+            if (!isFloat)
+            {
+                isFloat = true;
+            }
+            else
+            {
+                // more than 1 '.' in the number, so error.
+                std::cerr << "ERROR: More than 1 \'.\' in number on line " << currLine << std::endl;
+                return nullptr;
+            }
+        }
+        numberLexeme.push_back(currChar);
+        currChar = nextChar();
+    }
+    TokenType token = isFloat ? FLOAT_LIT : INTEGER_LIT;
+    return makeToken(token, numberLexeme);
 }
-
 
 Token *Scanner::makeToken(TokenType token)
 {
