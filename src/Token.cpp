@@ -1,10 +1,38 @@
 #include "Token.hpp"
 
-Token::Token(TokenType type, std::string lexeme, int line, int col){
+Token::Token(){};
+
+Token::Token(TokenType type, std::string lexeme, int line, int col)
+{
     theType = type;
     theLexeme = lexeme;
     lineNumber = line;
     colNumber = col;
+}
+
+void Token::setTheType(TokenType token){
+    theType = token;
+}
+
+TokenType Token::getTheType(){
+    return theType;
+}
+
+void Token::setTheLexeme(std::string lexeme){
+    theLexeme = lexeme;
+}
+
+std::string Token::getTheLexeme(){
+    return theLexeme;
+}
+
+void Token::setLocation(int line, int col){
+    lineNumber = line;
+    colNumber = col;
+}
+
+std::pair<int, int> Token::getLocation(){
+    return {lineNumber, colNumber};
 }
 
 void Token::printToken()

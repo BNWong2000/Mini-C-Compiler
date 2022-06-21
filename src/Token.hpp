@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <utility>
 
 enum TokenType
 {
@@ -99,8 +100,20 @@ enum TokenType
 class Token
 {
 public:
+    Token();
     Token(TokenType type, std::string lexeme, int line, int col);
     ~Token() = default;
+
+    void setTheType(TokenType token);
+    TokenType getTheType();
+
+    void setTheLexeme(std::string lexeme);
+    std::string getTheLexeme();
+
+    void setLocation(int line, int col);
+    std::pair<int, int> getLocation();
+
+
     void printToken();
 
 private:
