@@ -57,8 +57,6 @@ enum TokenType
     COLON,
     SEMICOLON,
     ARROW,
-    SINGLE_QUOTE,
-    DOUBLE_QUOTE,
 
     // Types:
     INT_TYPE,

@@ -127,10 +127,6 @@ std::string getTokenString(TokenType token)
         return "\';\'";
     case ARROW:
         return "\"->\"";
-    case SINGLE_QUOTE:
-        return "\'\'\'";
-    case DOUBLE_QUOTE:
-        return "\'\"\'";
     case INT_TYPE:
         return "int";
     case CHAR_TYPE:

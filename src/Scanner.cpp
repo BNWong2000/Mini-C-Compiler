@@ -11,9 +11,9 @@ Scanner::Scanner(std::istream *input)
 int Scanner::scan()
 {
     Token *currentToken = lex();
-    while(currentToken && currentToken->getTheType() != EOF_TOKEN){
+    while (currentToken && currentToken->getTheType() != EOF_TOKEN)
+    {
         currentToken->printToken();
-        std::cout << "hi" << std::endl;
         currentToken = lex();
     }
     return 0;
@@ -94,10 +94,43 @@ Token *Scanner::lex()
         return makeToken(SEMICOLON);
     case '\'':
         nextChar();
-        return makeToken(SINGLE_QUOTE);
+        if (currChar == '\\')
+        {
+            //
+        }
+        else
+        {
+        }
+        return makeToken(CHAR_LIT);
     case '\"':
+    {
         nextChar();
-        return makeToken(DOUBLE_QUOTE);
+        std::string stringLexeme = "\"";
+        while (currChar != '\"')
+        {
+            if(currChar == '\\'){
+                stringLexeme.push_back(currChar);
+                nextChar();
+            }
+            if(currChar == '\n')
+            {
+                // Error
+                std::cerr << "ERROR: Newline in String " << std::endl;
+                return nullptr;
+            }
+            else if (currChar == EOF)
+            {
+                // Error
+                std::cerr << "ERROR: Unterminated String " << std::endl;
+                return nullptr;
+            }
+            stringLexeme.push_back(currChar);
+            nextChar();
+        }
+        stringLexeme.push_back(currChar);
+        nextChar();
+        return makeToken(STRING_LIT, stringLexeme);
+    }
     default:
         if (isNum(currChar))
         {
@@ -135,6 +168,7 @@ bool isAlpha(int character)
 
 Token *Scanner::handleKeywordAndIdentifier()
 {
+
     return nullptr;
 }
 
