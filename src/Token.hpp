@@ -1,6 +1,9 @@
 #ifndef TOKEN_HPP
 #define TOKEN_HPP
 
+#include <string>
+#include <iostream>
+
 enum TokenType {
 
     // brace = {}, paren = (), bracket = []
@@ -26,8 +29,6 @@ enum TokenType {
     // Misc
     COMMA, DOT, COLON, SEMICOLON, ARROW, 
 
-    // Keywords:
-
     // Types:
     INT_TYPE, CHAR_TYPE, FLOAT_TYPE, DOUBLE_TYPE, VOID_TYPE,
     STRUCT_TYPE, UNION_TYPE,
@@ -43,7 +44,12 @@ enum TokenType {
     DO_KEYWORD, WHILE_KEYWORD, FOR_KEYWORD, CONTINUE_KEYWORD,
     
     // Return
-    RETURN_KEYWORD
+    RETURN_KEYWORD,
+
+    // Literals
+    INTEGER_LIT, FLOAT_LIT, CHAR_LIT, STRING_LIT,
+
+    EOF_TOKEN
 };
 
 
@@ -52,8 +58,15 @@ public:
     Token();
     ~Token() = default;
     void printToken();
-private:
 
+private:
+    TokenType theType;
+
+    // Stores the information of the token, if it's a literal
+    std::string lexeme; 
+
+    // Stores the line on the file that the token occured
+    int lineNumber;
 };
 
 #endif
