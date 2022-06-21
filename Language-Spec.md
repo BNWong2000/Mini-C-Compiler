@@ -1,5 +1,19 @@
 # Language Specification
 
+### Features
+Here is a rough overview of the features I intend on supporting with this language.
+- Pointers and Arrays
+    - and thus, C-style strings
+- Structures
+- Unions
+- Functions
+- Integer and Floating Point Arithmetic
+- Logical operations
+    - Short circuiting
+- Loops and Decision Structures
+- Strong type checking
+- Single Line Comments
+
 ### Types
 
 ##### Basic Data Types
@@ -22,25 +36,20 @@ array
 ```
 { } [ ] ( ) 
 + - * / % & | ^ << >>
-++ -- 
 ! ~ && || == != < > <= >= 
 = += -= *= /= %= &= |= ^= <<= >>=
 , . -> : ; 
 ```
 
-### Features
-Here is a rough overview of the features I intend on supporting with this language.
-- Pointers and Arrays
-    - and thus, C-style strings
-- Structures
-- Unions
-- Functions
-- Integer and Floating Point Arithmetic
-- Logical operations
-    - Short circuiting
-- Loops and Decision Structures
-- Strong type checking
-- Single Line Comments
+### Reserved Words
+```
+int char float double void
+struct union
+switch case default break
+do while for continue
+if else
+return
+```
 
 
 

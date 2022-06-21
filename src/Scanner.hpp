@@ -14,7 +14,7 @@ public:
 
     int scan(std::ifstream &inputStream);
 private:
-
+    
 };
 
 #endif

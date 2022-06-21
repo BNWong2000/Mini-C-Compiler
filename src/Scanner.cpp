@@ -8,3 +8,5 @@ int Scanner::scan(std::ifstream &inputStream){
     return 0;
 }
 
+
+
