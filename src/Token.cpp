@@ -110,7 +110,7 @@ std::string getTokenString(TokenType token)
     case MOD_EQUAL:
         return "\"%=\"";
     case AND_EQUAL:
-        return "\"\"";
+        return "\"&=\"";
     case OR_EQUAL:
         return "\"|=\"";
     case XOR_EQUAL:
