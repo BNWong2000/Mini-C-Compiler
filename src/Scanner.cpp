@@ -55,31 +55,143 @@ Token *Scanner::lex()
         return makeToken(RIGHT_BRACKET);
     case '+':
         // +, +=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(PLUS_EQUAL);
+        }else{
+            return makeToken(PLUS);
+        }
     case '-':
         // -, -=, ->
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(MINUS_EQUAL);
+        }
+        else if (currChar == '>'){
+            nextChar();
+            return makeToken(ARROW);
+        }else{
+            return makeToken(MINUS);
+        }        
     case '*':
         // *, *= 
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(STAR_EQUAL);
+        }else{
+            return makeToken(STAR);
+        }
     case '/':
         // /, /=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(SLASH_EQUAL);
+        }else{
+            return makeToken(SLASH);
+        }
     case '%':
         // %, %=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(MOD_EQUAL);
+        }else{
+            return makeToken(MOD);
+        }
     case '|':
         // |, ||, |=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(OR_EQUAL);
+        }
+        else if (currChar == '|'){
+            nextChar();
+            return makeToken(LOGIC_OR);
+        }else{
+            return makeToken(BIT_OR);
+        }    
     case '&':
         // &, &&, &=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(AND_EQUAL);
+        }
+        else if (currChar == '&'){
+            nextChar();
+            return makeToken(LOGIC_AND);
+        }else{
+            return makeToken(BIT_AND);
+        }
     case '^':
         // ^, ^=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(XOR_EQUAL);
+        }else{
+            return makeToken(BIT_XOR);
+        }
     case '~':
         nextChar();
         return makeToken(BIT_NOT);
     case '<':
         // <, <<, <=, <<=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(LESS_EQUAL);
+        }else if (currChar == '<'){
+            nextChar();
+            if(currChar == '='){
+                nextChar();
+                return makeToken(LSHIFT_EQUAL);
+            }else{
+                return makeToken(LEFT_SHIFT);
+            }
+        }else{
+            return makeToken(LESS);
+        }
     case '>':
         // >, >>, >=, >>=
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(GREATER_EQUAL);
+        }else if (currChar == '>'){
+            nextChar();
+            if(currChar == '='){
+                nextChar();
+                return makeToken(RSHIFT_EQUAL);
+            }else{
+                return makeToken(RIGHT_SHIFT);
+            }
+        }else{
+            return makeToken(GREATER);
+        }
     case '!':
         // !, != 
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(LOGIC_NEQUAL);
+        }else{
+            return makeToken(LOGIC_NOT);
+        }
     case '=':
         // =, ==
+        nextChar();
+        if(currChar == '='){
+            nextChar();
+            return makeToken(LOGIC_EQUAL);
+        }else{
+            return makeToken(ASSIGN);
+        }
     case ',':
         nextChar();
         return makeToken(COMMA);

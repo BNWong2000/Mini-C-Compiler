@@ -48,6 +48,7 @@ enum TokenType
     MOD_EQUAL,
     AND_EQUAL,
     OR_EQUAL,
+    XOR_EQUAL,
     LSHIFT_EQUAL,
     RSHIFT_EQUAL,
 

@@ -113,6 +113,8 @@ std::string getTokenString(TokenType token)
         return "\"\"";
     case OR_EQUAL:
         return "\"|=\"";
+    case XOR_EQUAL:
+        return "\"^=\"";
     case LSHIFT_EQUAL:
         return "\"<<=\"";
     case RSHIFT_EQUAL:
